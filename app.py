@@ -23,7 +23,7 @@ from templates.clause_templates import get_all_templates
 
 # Page Config
 st.set_page_config(
-    page_title="LEGIFYX - Legal Contract Analysis",
+    page_title="LEGIFYX - Legal Contract Analysis Bot",
     page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -101,24 +101,50 @@ def load_premium_css():
             background: linear-gradient(180deg, #0A1628 0%, #071018 100%) !important;
         }
         
-        [data-testid="stSidebar"] .stMarkdown {
-            color: #C5D4E8 !important;
+        [data-testid="stSidebar"] .stMarkdown p,
+        [data-testid="stSidebar"] h3,
+        [data-testid="stSidebar"] label,
+        [data-testid="stSidebar"] p,
+        [data-testid="stSidebar"] span {
+            color: #FFFFFF !important;
         }
         
         [data-testid="stSidebar"] h3 {
-            color: #D4AF37 !important;
             font-size: 0.9rem !important;
             letter-spacing: 1px !important;
-        }
-        
-        [data-testid="stSidebar"] label {
-            color: #C5D4E8 !important;
+            color: #D4AF37 !important; /* Keep headers gold but readable */
         }
         
         [data-testid="stSidebar"] .stSelectbox label,
         [data-testid="stSidebar"] .stCheckbox label,
-        [data-testid="stSidebar"] .stSlider label {
+        [data-testid="stSidebar"] .stSlider label,
+        [data-testid="stSidebar"] .stToggle label,
+        [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+            color: #FFFFFF !important;
+        }
+        
+        [data-testid="stSidebar"] .stSlider span {
             color: #C5D4E8 !important;
+        }
+        
+        [data-testid="stSidebar"] div[data-testid="stNotification"] {
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #FFFFFF !important;
+            border: 1px solid rgba(212, 175, 55, 0.3) !important;
+        }
+        
+        [data-testid="stSidebar"] div[data-testid="stNotification"] p {
+            color: #FFFFFF !important;
+            font-weight: 600 !important;
+        }
+
+        /* Sidebar Toggle/Slider handle fix */
+        [data-testid="stSidebar"] div[data-baseweb="slider"] div {
+            background-color: #D4AF37 !important;
+        }
+        
+        [data-testid="stSidebar"] [data-baseweb="checkbox"] div {
+            border-color: #D4AF37 !important;
         }
         
         /* === TAB NAVIGATION (FIXED) === */
@@ -472,11 +498,17 @@ def load_premium_css():
         
         /* === ACCESSIBILITY PANEL === */
         .acc-panel {
-            background: linear-gradient(145deg, rgba(34, 197, 94, 0.15), rgba(13, 33, 55, 0.9));
-            border: 2px solid rgba(34, 197, 94, 0.4);
-            border-radius: 14px;
-            padding: 18px;
-            margin: 15px 0;
+            background: rgba(34, 197, 94, 0.15) !important;
+            border: 1px solid rgba(34, 197, 94, 0.4) !important;
+            border-radius: 12px !important;
+            padding: 15px !important;
+            margin: 10px 0 !important;
+            color: #FFFFFF !important;
+        }
+        
+        /* Sidebar Divider */
+        [data-testid="stSidebar"] hr {
+            background-color: rgba(212, 175, 55, 0.2) !important;
         }
         
         /* === CODE BLOCKS & TEXT COLORS === */
@@ -616,6 +648,7 @@ def render_sidebar():
         </div>
         """, unsafe_allow_html=True)
         
+        st.markdown('<div class="acc-panel">', unsafe_allow_html=True)
         st.markdown("### ♿ Accessibility")
         st.session_state.acc_mode = st.toggle("🔊 Enable Accessibility", st.session_state.acc_mode)
         
@@ -628,6 +661,7 @@ def render_sidebar():
             if st.button("🔊 Test Voice", use_container_width=True):
                 speak("Voice test successful. Legifyx is ready.")
                 st.info("Testing voice...")
+        st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown("---")
         st.markdown("### 🌐 Language")
