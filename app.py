@@ -50,12 +50,13 @@ def load_premium_css():
         #MainMenu, footer { visibility: hidden; }
         header { background: transparent !important; }
         
-        /* Fix Sidebar Toggle Button Visibility */
-        [data-testid="stHeader"] button {
-            color: #D4AF37 !important;
+        /* Fix Sidebar Toggle Button Visibility (Hamburger menu) */
+        [data-testid="stHeader"] button svg {
+            fill: #D4AF37 !important;
+            stroke: #D4AF37 !important;
         }
         [data-testid="stHeader"] {
-            background: rgba(0,0,0,0) !important;
+            background: transparent !important;
         }
         
         /* === MAIN HEADER === */
@@ -116,10 +117,15 @@ def load_premium_css():
         [data-testid="stSidebar"] h2,
         [data-testid="stSidebar"] h3,
         [data-testid="stSidebar"] label,
-        [data-testid="stSidebar"] p,
-        [data-testid="stSidebar"] span {
+        [data-testid="stSidebar"] p {
             color: #FFFFFF !important;
             opacity: 1 !important;
+        }
+        
+        /* Targets ALL sidebar text without breaking widget backgrounds */
+        [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p,
+        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
+            color: #FFFFFF !important;
         }
         
         [data-testid="stSidebar"] h3 {
@@ -155,10 +161,11 @@ def load_premium_css():
             font-weight: 600 !important;
         }
 
-        [data-testid="stSidebar"] [data-baseweb="select"] [data-testid="stSelectedValue"] {
+        /* Ensure dropdown text is visible but background is NOT white */
+        [data-testid="stSidebar"] div[data-baseweb="select"] div {
             color: #FFFFFF !important;
         }
-
+        
         /* Sidebar Toggle/Slider handle fix */
         [data-testid="stSidebar"] div[data-baseweb="slider"] div {
             background-color: #D4AF37 !important;
