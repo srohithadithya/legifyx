@@ -192,6 +192,12 @@ def load_premium_css():
         [data-testid="stSidebar"] [data-testid="stSelectedValue"] {
             color: #FFFFFF !important;
         }
+
+        /* Fix Sidebar Arrows and Icons */
+        [data-testid="stSidebar"] svg {
+            fill: #D4AF37 !important;
+            color: #D4AF37 !important;
+        }
         
         /* Sidebar Toggle/Slider handle fix */
         [data-testid="stSidebar"] div[data-baseweb="slider"] div {
