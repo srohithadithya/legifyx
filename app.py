@@ -198,6 +198,12 @@ def load_premium_css():
             fill: #D4AF37 !important;
             color: #D4AF37 !important;
         }
+
+        /* Specific Selectbox Arrow fix */
+        [data-testid="stSidebar"] [data-baseweb="select"] svg {
+            fill: #D4AF37 !important;
+            color: #D4AF37 !important;
+        }
         
         /* Sidebar Toggle/Slider handle fix */
         [data-testid="stSidebar"] div[data-baseweb="slider"] div {
