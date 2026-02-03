@@ -165,21 +165,35 @@ def load_premium_css():
         
         /* === EXPANDER (INNER SECTIONS) FIXED === */
         .streamlit-expanderHeader {
-            background: rgba(13, 33, 55, 0.9) !important;
+            background: rgba(13, 33, 55, 0.95) !important;
             color: #FFFFFF !important;
             border-radius: 12px !important;
-            border: 1px solid rgba(212, 175, 55, 0.2) !important;
+            border: 1px solid rgba(212, 175, 55, 0.3) !important;
             font-weight: 600 !important;
         }
         
+        .streamlit-expanderHeader p,
+        .streamlit-expanderHeader span,
+        .streamlit-expanderHeader div {
+            color: #FFFFFF !important;
+        }
+        
         .streamlit-expanderHeader:hover {
-            border-color: rgba(212, 175, 55, 0.5) !important;
-            background: rgba(26, 58, 92, 0.9) !important;
+            border-color: rgba(212, 175, 55, 0.6) !important;
+            background: rgba(26, 58, 92, 0.95) !important;
+        }
+        
+        [data-testid="stExpander"] summary {
+            color: #FFFFFF !important;
+        }
+        
+        [data-testid="stExpander"] summary span {
+            color: #FFFFFF !important;
         }
         
         .streamlit-expanderContent {
-            background: rgba(10, 22, 40, 0.7) !important;
-            border: 1px solid rgba(212, 175, 55, 0.1) !important;
+            background: rgba(10, 22, 40, 0.8) !important;
+            border: 1px solid rgba(212, 175, 55, 0.15) !important;
             border-top: none !important;
             border-radius: 0 0 12px 12px !important;
         }
@@ -634,8 +648,8 @@ def render_sidebar():
         st.markdown("""
         <div style="font-size: 0.75rem; color: #8BA3C7; background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 8px;">
             <strong>Type:</strong> JSON Files<br>
-            <strong>DB:</strong> Not Required<br>
-            <strong>Encryption:</strong> AES-256
+            <strong>Encryption:</strong> AES-256<br>
+            <strong>Location:</strong> Local Storage
         </div>
         """, unsafe_allow_html=True)
         
@@ -793,23 +807,76 @@ def render_results_tab():
         st.markdown(f'<div class="premium-card"><div class="card-title">📊 Summary</div><div style="color: #C5D4E8; line-height: 1.8;">{r.executive_summary.replace(chr(10), "<br>")}</div></div>', unsafe_allow_html=True)
     
     with tabs[3]:
+        st.markdown('<p style="color: #C5D4E8;">Export your analysis in different formats:</p>', unsafe_allow_html=True)
         c1, c2, c3 = st.columns(3)
+        
+        # Define output directories using project path
+        project_dir = Path(__file__).parent
+        exports_dir = project_dir / "exports"
+        audio_dir = project_dir / "audio_output"
+        exports_dir.mkdir(exist_ok=True)
+        audio_dir.mkdir(exist_ok=True)
+        
         with c1:
-            if st.button("📄 PDF Report", use_container_width=True):
-                pdf = PDFGenerator()
-                path = pdf.generate_report(r)
-                if path:
-                    with open(path, 'rb') as f:
-                        st.download_button("⬇️ Download", f.read(), f"legifyx_{r.contract_id}.pdf", "application/pdf")
+            if st.button("📄 Generate PDF", use_container_width=True):
+                with st.spinner("Generating PDF..."):
+                    try:
+                        pdf = PDFGenerator(output_dir=str(exports_dir))
+                        path = pdf.generate_report(r)
+                        if path and os.path.exists(path):
+                            with open(path, 'rb') as f:
+                                pdf_data = f.read()
+                            st.download_button(
+                                "⬇️ Download PDF", 
+                                pdf_data, 
+                                f"legifyx_{r.contract_id}.pdf", 
+                                "application/pdf",
+                                key="pdf_download"
+                            )
+                            st.success(f"✅ PDF saved to: {path}")
+                        else:
+                            st.error("PDF generation failed")
+                    except Exception as e:
+                        st.error(f"Error: {e}")
+        
         with c2:
-            if st.button("📋 JSON", use_container_width=True):
-                st.download_button("⬇️ Download", json.dumps({'id': r.contract_id, 'type': r.contract_type, 'score': r.risk_result.overall_score if r.risk_result else 0}, indent=2), f"legifyx_{r.contract_id}.json")
+            json_data = json.dumps({
+                'id': r.contract_id, 
+                'type': r.contract_type, 
+                'score': r.risk_result.overall_score if r.risk_result else 0,
+                'level': r.risk_result.risk_level.value if r.risk_result else 'unknown',
+                'summary': r.executive_summary,
+                'recommendations': r.recommendations[:10] if r.recommendations else []
+            }, indent=2)
+            st.download_button(
+                "📋 Download JSON", 
+                json_data, 
+                f"legifyx_{r.contract_id}.json",
+                "application/json",
+                use_container_width=True
+            )
+        
         with c3:
-            if st.button("🔊 Audio", use_container_width=True):
-                tts = TTSService()
-                path = tts.generate_summary_audio(r.plain_language_summary[:3000], r.contract_id)
-                if path:
-                    st.success(f"Saved: {path}")
+            if st.button("🔊 Generate Audio", use_container_width=True):
+                with st.spinner("Generating audio summary..."):
+                    try:
+                        tts = TTSService(output_dir=str(audio_dir))
+                        path = tts.generate_summary_audio(r.plain_language_summary[:3000], r.contract_id)
+                        if path and os.path.exists(path):
+                            with open(path, 'rb') as f:
+                                audio_data = f.read()
+                            st.download_button(
+                                "⬇️ Download Audio",
+                                audio_data,
+                                f"legifyx_{r.contract_id}.mp3",
+                                "audio/mpeg",
+                                key="audio_download"
+                            )
+                            st.success(f"✅ Audio saved to: {path}")
+                        else:
+                            st.error("Audio generation failed")
+                    except Exception as e:
+                        st.error(f"Error: {e}")
 
 
 def render_templates_tab():
@@ -880,7 +947,7 @@ def render_templates_tab():
 def render_history_tab():
     """Render history"""
     st.markdown('<div class="section-hdr">📜 History</div>', unsafe_allow_html=True)
-    st.markdown('<div class="info-box">💾 <b>Storage:</b> JSON files at data/storage/ - No database needed</div>', unsafe_allow_html=True)
+    st.markdown('<div class="info-box">💾 <b>Storage:</b> Your analysis history is stored securely in local JSON files.</div>', unsafe_allow_html=True)
     
     hist = st.session_state.history
     if hist:
