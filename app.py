@@ -465,26 +465,29 @@ def load_premium_css():
             margin: 15px 0;
         }
         
-        /* === HACKATHON BADGE === */
-        .hackathon-badge {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: linear-gradient(135deg, #EF4444, #DC2626);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            z-index: 999;
-            box-shadow: 0 5px 20px rgba(239, 68, 68, 0.4);
-            animation: pulse 2s infinite;
+        /* === CODE BLOCKS & TEXT COLORS === */
+        .stCode, code {
+            color: #E2E8F0 !important;
+            background: rgba(13, 33, 55, 0.9) !important;
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        pre {
+            background: rgba(13, 33, 55, 0.95) !important;
+            color: #E2E8F0 !important;
+            border: 1px solid rgba(212, 175, 55, 0.2) !important;
+            border-radius: 10px !important;
+        }
+        
+        /* Expander text fix */
+        .streamlit-expanderContent p,
+        .streamlit-expanderContent span,
+        .streamlit-expanderContent div {
+            color: #C5D4E8 !important;
+        }
+        
+        .streamlit-expanderContent strong,
+        .streamlit-expanderContent b {
+            color: #D4AF37 !important;
         }
     </style>
     """, unsafe_allow_html=True)
@@ -542,9 +545,8 @@ def render_header():
     <div class="brand-header">
         <div class="brand-logo">⚖️ LEGIFYX</div>
         <div class="brand-tagline">AI-POWERED LEGAL CONTRACT ANALYSIS BOT FOR INDIAN SMEs</div>
-        <div class="brand-badge">🛡️ SECURE • TRUSTED • ENTERPRISE GRADE • HACKATHON 2024</div>
+        <div class="brand-badge">🛡️ SECURE • TRUSTED • ENTERPRISE GRADE</div>
     </div>
-    <div class="hackathon-badge">🏆 HACKATHON READY</div>
     """, unsafe_allow_html=True)
 
 
@@ -558,7 +560,7 @@ def render_footer():
             <div style="color: #8BA3C7;">🇮🇳 Made in India with ❤️</div>
         </div>
         <div class="footer-bottom">
-            <div>© 2024 Legifyx. All Rights Reserved. | Designed for Indian SMEs</div>
+            <div>© 2026 Legifyx. All Rights Reserved. | Designed for Indian SMEs</div>
             <div class="footer-tech">
                 <span class="tech-badge">💾 JSON Storage (No DB)</span>
                 <span class="tech-badge">🔒 AES-256 Encryption</span>
@@ -792,28 +794,68 @@ def render_results_tab():
 
 
 def render_templates_tab():
-    """Render templates"""
+    """Render templates with proper styling"""
     st.markdown('<div class="section-hdr">📚 Templates & Resources</div>', unsafe_allow_html=True)
     
-    tabs = st.tabs(["📝 Clause Templates", "📄 Contracts", "📖 Legal Info"])
+    st.markdown('<div class="info-box">💡 <b style="color: #22C55E;">Download and customize</b> <span style="color: #C5D4E8;">these SME-friendly templates for your business contracts.</span></div>', unsafe_allow_html=True)
+    
+    tabs = st.tabs(["📝 Clause Templates", "📄 Contract Types", "📖 Legal Resources"])
     
     with tabs[0]:
+        st.markdown('<p style="color: #C5D4E8; margin-bottom: 20px;">Standard balanced clauses for fair contracts:</p>', unsafe_allow_html=True)
         templates = get_all_templates()
         for k, t in templates.items():
-            with st.expander(f"📋 {t['name']} ({t['risk_level'].upper()})"):
-                st.markdown(f"**Category:** {t['category'].title()}")
+            risk_color = "#22C55E" if t['risk_level'] == 'low' else "#EAB308" if t['risk_level'] == 'medium' else "#EF4444"
+            with st.expander(f"📋 {t['name']}"):
+                st.markdown(f'<p style="color: #C5D4E8;"><b style="color: #D4AF37;">Category:</b> {t["category"].title()} | <b style="color: #D4AF37;">Risk Level:</b> <span style="color: {risk_color};">{t["risk_level"].upper()}</span></p>', unsafe_allow_html=True)
                 st.code(t['template'].strip()[:800], language="text")
-                st.markdown(f"💡 {t['guidance']}")
+                st.markdown(f'<p style="color: #22C55E;">💡 <b>Guidance:</b> <span style="color: #C5D4E8;">{t["guidance"]}</span></p>', unsafe_allow_html=True)
+                if t.get('variables'):
+                    st.markdown(f'<p style="color: #8BA3C7;"><b style="color: #D4AF37;">Variables:</b> {" | ".join(t["variables"])}</p>', unsafe_allow_html=True)
     
     with tabs[1]:
-        items = [("👔", "Employment"), ("🔧", "Service"), ("📦", "Vendor"), ("🔐", "NDA"), ("🤝", "Partnership"), ("🏢", "Lease")]
-        for icon, name in items:
-            st.markdown(f'<div class="template-item"><span style="font-size: 1.3rem;">{icon}</span> <b style="color: #FFF;">{name} Agreement</b></div>', unsafe_allow_html=True)
+        st.markdown('<p style="color: #C5D4E8; margin-bottom: 20px;">Available contract types for Indian SMEs:</p>', unsafe_allow_html=True)
+        items = [
+            ("👔", "Employment Agreement", "For hiring employees with balanced terms"),
+            ("🔧", "Service Agreement", "For engaging consultants and service providers"),
+            ("📦", "Vendor Contract", "For supplier relationships and procurement"),
+            ("🔐", "Non-Disclosure Agreement", "Mutual NDA for business discussions"),
+            ("🤝", "Partnership Deed", "For business partnership arrangements"),
+            ("🏢", "Commercial Lease", "For renting office or shop space"),
+            ("💼", "Consultancy Agreement", "For hiring consultants"),
+            ("🏪", "Franchise Agreement", "For franchise business arrangements")
+        ]
+        for icon, name, desc in items:
+            st.markdown(f'''
+            <div class="template-item">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="font-size: 1.8rem;">{icon}</span>
+                    <div>
+                        <b style="color: #FFFFFF; font-size: 1rem;">{name}</b>
+                        <p style="color: #8BA3C7; margin: 5px 0 0 0; font-size: 0.85rem;">{desc}</p>
+                    </div>
+                </div>
+            </div>
+            ''', unsafe_allow_html=True)
     
     with tabs[2]:
-        laws = [("Indian Contract Act, 1872", "Valid contracts, enforceability"), ("Arbitration Act, 1996", "Dispute resolution"), ("IT Act, 2000", "Digital contracts")]
-        for law, desc in laws:
-            st.markdown(f'<div class="clause-item"><b style="color: #D4AF37;">📜 {law}</b><br><span style="color: #8BA3C7;">{desc}</span></div>', unsafe_allow_html=True)
+        st.markdown('<p style="color: #C5D4E8; margin-bottom: 20px;">Key Indian legal frameworks for contracts:</p>', unsafe_allow_html=True)
+        laws = [
+            ("📜 Indian Contract Act, 1872", "Foundation of contract law - validity, enforceability, breach remedies", ["Section 10: Valid contract elements", "Section 23: Lawful consideration", "Section 74: Penalty clauses"]),
+            ("⚖️ Arbitration Act, 1996", "Dispute resolution and enforcement of arbitral awards", ["Written agreements required", "Choose seat of arbitration", "Awards enforceable like decrees"]),
+            ("💻 IT Act, 2000", "Legal validity of electronic contracts and signatures", ["E-contracts are valid", "Digital signatures binding", "Data protection obligations"]),
+            ("🛡️ Consumer Protection Act, 2019", "Protection against unfair contract terms", ["Unfair terms provisions", "Consumer rights", "Dispute resolution"])
+        ]
+        for title, desc, points in laws:
+            st.markdown(f'''
+            <div class="clause-item">
+                <b style="color: #D4AF37; font-size: 1.05rem;">{title}</b>
+                <p style="color: #C5D4E8; margin: 8px 0;">{desc}</p>
+                <div style="margin-top: 10px;">
+                    {" ".join([f'<span style="background: rgba(212, 175, 55, 0.15); color: #D4AF37; padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; margin-right: 8px;">{p}</span>' for p in points])}
+                </div>
+            </div>
+            ''', unsafe_allow_html=True)
 
 
 def render_history_tab():
