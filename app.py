@@ -597,7 +597,7 @@ def render_footer():
             <div class="footer-tech">
                 <span class="tech-badge">💾 JSON Storage</span>
                 <span class="tech-badge">🔒 AES-256 Encryption</span>
-                <span class="tech-badge">🐍 Python 3.12+</span>
+                <span class="tech-badge">🐍 Python 3.12.0</span>
                 <span class="tech-badge">🤖 spaCy NLP</span>
                 <span class="tech-badge">♿ TTS Accessibility</span>
             </div>

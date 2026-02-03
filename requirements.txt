@@ -1,55 +1,55 @@
-# Legifyx Requirements - Compatible with Python 3.9 - 3.12
+# Legifyx Requirements
+# Python 3.12.0 Compatible - Tested and Verified
 
 # Core Framework
-streamlit>=1.28.0
-watchdog>=3.0.0
+streamlit==1.30.0
+watchdog==3.0.0
 
 # NLP Libraries
-spacy>=3.7.0
-nltk>=3.8.1
+spacy==3.7.2
+nltk==3.8.1
 
 # Document Processing
-PyPDF2>=3.0.0
-python-docx>=1.0.0
-pdfplumber>=0.10.0
-Pillow>=10.0.0
+PyPDF2==3.0.1
+python-docx==1.1.0
+pdfplumber==0.10.3
+Pillow==10.2.0
 
-# OCR (optional - requires Tesseract installed)
-pytesseract>=0.3.10
+# OCR (Optional - Requires Tesseract Installed)
+pytesseract==0.3.10
 
 # Text-to-Speech
-pyttsx3>=2.90
-gTTS>=2.5.0
+pyttsx3==2.90
+gTTS==2.5.1
 
 # Translation
-deep-translator>=1.11.0
+deep-translator==1.11.4
 
 # PDF Generation
-reportlab>=4.0.0
+reportlab==4.0.9
 
 # Data Processing
-pandas>=2.0.0
-numpy>=1.24.0
+pandas==2.2.0
+numpy==1.26.3
 
 # Security & Encryption
-cryptography>=41.0.0
-python-dotenv>=1.0.0
+cryptography==42.0.2
+python-dotenv==1.0.1
 
 # Utilities
-python-dateutil>=2.8.2
-regex>=2023.10.3
-python-Levenshtein>=0.23.0
-fuzzywuzzy>=0.18.0
+python-dateutil==2.8.2
+regex==2023.12.25
+python-Levenshtein==0.25.0
 
 # Visualization
-plotly>=5.18.0
+plotly==5.18.0
 
 # Logging
-loguru>=0.7.2
+loguru==0.7.2
 
 # Language Detection
-langdetect>=1.0.9
+langdetect==1.0.9
 
 # Text Processing
-textblob>=0.17.1
-chardet>=5.2.0
+textblob==0.18.0
+chardet==5.2.0

@@ -17,8 +17,9 @@ class DocumentParser:
     
     SUPPORTED_FORMATS = ['.pdf', '.docx', '.doc', '.txt', '.jpg', '.jpeg', '.png']
     
-    def __init__(self):
-        self.ocr_service = None
+    def __init__(self, tesseract_path: str = None):
+        from .ocr_service import OCRService
+        self.ocr_service = OCRService(tesseract_path=tesseract_path)
     
     def parse(self, file_path: str) -> Tuple[str, dict]:
         """
@@ -137,22 +138,20 @@ class DocumentParser:
         return ""
     
     def _parse_image(self, file_path: str) -> str:
-        """Parse image using OCR"""
-        try:
-            import pytesseract
-            from PIL import Image
-            
-            image = Image.open(file_path)
-            text = pytesseract.image_to_string(image, lang='eng+hin')
-            
-            return text
-        
-        except ImportError:
-            logger.error("OCR libraries not available. Install pytesseract and Pillow")
-            return ""
-        except Exception as e:
-            logger.error(f"OCR failed: {e}")
-            return ""
+        """Parse image using comprehensive OCRService"""
+        if not self.ocr_service or not self.ocr_service.is_available():
+            # Fallback to simple logic if service failed to init
+            try:
+                import pytesseract
+                from PIL import Image
+                image = Image.open(file_path)
+                return pytesseract.image_to_string(image, lang='eng+hin')
+            except ImportError:
+                logger.error("OCR libraries not available.")
+                return ""
+
+        text, _ = self.ocr_service.extract_text(file_path)
+        return text
     
     def validate_file(self, file_path: str) -> Tuple[bool, str]:
         """Validate file before parsing"""

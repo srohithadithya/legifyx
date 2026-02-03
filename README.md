@@ -4,7 +4,7 @@
 
 **AI-Powered Legal Assistant for Indian SMEs**
 
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://python.org)
+[![Python 3.12.0](https://img.shields.io/badge/Python-3.12.0-blue.svg)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B.svg)](https://streamlit.io)
 [![Made in India](https://img.shields.io/badge/Made%20with%20❤️%20in-India-orange.svg)]()
 
@@ -87,7 +87,7 @@
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.9 - 3.12
+- Python 3.12.0 (Recommended)
 - Windows / Linux / macOS
 
 ### Installation
