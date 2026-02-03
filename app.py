@@ -102,17 +102,23 @@ def load_premium_css():
         }
         
         [data-testid="stSidebar"] .stMarkdown p,
+        [data-testid="stSidebar"] h1,
+        [data-testid="stSidebar"] h2,
         [data-testid="stSidebar"] h3,
         [data-testid="stSidebar"] label,
         [data-testid="stSidebar"] p,
-        [data-testid="stSidebar"] span {
+        [data-testid="stSidebar"] span,
+        [data-testid="stSidebar"] div {
             color: #FFFFFF !important;
         }
         
         [data-testid="stSidebar"] h3 {
-            font-size: 0.9rem !important;
+            font-size: 1.1rem !important;
+            font-weight: 700 !important;
             letter-spacing: 1px !important;
-            color: #D4AF37 !important; /* Keep headers gold but readable */
+            color: #D4AF37 !important;
+            margin-top: 20px !important;
+            margin-bottom: 10px !important;
         }
         
         [data-testid="stSidebar"] .stSelectbox label,
@@ -145,6 +151,10 @@ def load_premium_css():
         
         [data-testid="stSidebar"] [data-baseweb="checkbox"] div {
             border-color: #D4AF37 !important;
+        }
+        
+        [data-testid="stSidebar"] [data-baseweb="toggle"] div {
+            background-color: #D4AF37 !important;
         }
         
         /* === TAB NAVIGATION (FIXED) === */
@@ -497,18 +507,15 @@ def load_premium_css():
         ::-webkit-scrollbar-thumb:hover { background: #E8C547; }
         
         /* === ACCESSIBILITY PANEL === */
-        .acc-panel {
-            background: rgba(34, 197, 94, 0.15) !important;
-            border: 1px solid rgba(34, 197, 94, 0.4) !important;
-            border-radius: 12px !important;
-            padding: 15px !important;
-            margin: 10px 0 !important;
+        [data-testid="stSidebar"] [data-baseweb="select"] div,
+        [data-testid="stSidebar"] input {
             color: #FFFFFF !important;
         }
-        
+
         /* Sidebar Divider */
         [data-testid="stSidebar"] hr {
-            background-color: rgba(212, 175, 55, 0.2) !important;
+            background-color: rgba(212, 175, 55, 0.4) !important;
+            margin: 20px 0 !important;
         }
         
         /* === CODE BLOCKS & TEXT COLORS === */
@@ -648,20 +655,21 @@ def render_sidebar():
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown('<div class="acc-panel">', unsafe_allow_html=True)
+        # Accessibility Section
         st.markdown("### ♿ Accessibility")
-        st.session_state.acc_mode = st.toggle("🔊 Enable Accessibility", st.session_state.acc_mode)
-        
-        if st.session_state.acc_mode:
-            st.success("✅ Accessibility ON")
-            st.session_state.voice_on = st.checkbox("🗣️ Voice Navigation", st.session_state.voice_on)
-            st.session_state.auto_read = st.checkbox("📖 Auto-Read Results", st.session_state.auto_read)
-            st.session_state.speed = st.slider("🔈 Speed", 100, 250, st.session_state.speed, 25)
+        acc_col = st.container()
+        with acc_col:
+            st.session_state.acc_mode = st.toggle("🔊 Enable Accessibility", st.session_state.acc_mode)
             
-            if st.button("🔊 Test Voice", use_container_width=True):
-                speak("Voice test successful. Legifyx is ready.")
-                st.info("Testing voice...")
-        st.markdown('</div>', unsafe_allow_html=True)
+            if st.session_state.acc_mode:
+                st.success("✅ Accessibility ON")
+                st.session_state.voice_on = st.checkbox("🗣️ Voice Navigation", st.session_state.voice_on)
+                st.session_state.auto_read = st.checkbox("📖 Auto-Read Results", st.session_state.auto_read)
+                st.session_state.speed = st.slider("🔈 Speed", 100, 250, st.session_state.speed, 25)
+                
+                if st.button("🔊 Test Voice", use_container_width=True):
+                    speak("Voice test successful. Legifyx is ready.")
+                    st.info("Testing voice...")
         
         st.markdown("---")
         st.markdown("### 🌐 Language")
