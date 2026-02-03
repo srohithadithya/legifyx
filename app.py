@@ -466,16 +466,35 @@ def load_premium_css():
         }
         
         /* === CODE BLOCKS & TEXT COLORS === */
-        .stCode, code {
-            color: #E2E8F0 !important;
-            background: rgba(13, 33, 55, 0.9) !important;
+        .stCode, .stCode code, .stCodeBlock code {
+            color: #F1F5F9 !important;
+            background: #0D2137 !important;
         }
         
-        pre {
-            background: rgba(13, 33, 55, 0.95) !important;
-            color: #E2E8F0 !important;
-            border: 1px solid rgba(212, 175, 55, 0.2) !important;
+        pre, .stCodeBlock pre {
+            background: #0D2137 !important;
+            color: #F1F5F9 !important;
+            border: 1px solid rgba(212, 175, 55, 0.3) !important;
             border-radius: 10px !important;
+            padding: 15px !important;
+        }
+        
+        code {
+            color: #F1F5F9 !important;
+        }
+        
+        [data-testid="stCode"] {
+            background: #0D2137 !important;
+        }
+        
+        [data-testid="stCode"] pre {
+            background: #0D2137 !important;
+            color: #F1F5F9 !important;
+        }
+        
+        [data-testid="stCode"] code {
+            color: #F1F5F9 !important;
+            background: transparent !important;
         }
         
         /* Expander text fix */
@@ -562,7 +581,7 @@ def render_footer():
         <div class="footer-bottom">
             <div>© 2026 Legifyx. All Rights Reserved. | Designed for Indian SMEs</div>
             <div class="footer-tech">
-                <span class="tech-badge">💾 JSON Storage (No DB)</span>
+                <span class="tech-badge">💾 JSON Storage</span>
                 <span class="tech-badge">🔒 AES-256 Encryption</span>
                 <span class="tech-badge">🐍 Python 3.12+</span>
                 <span class="tech-badge">🤖 spaCy NLP</span>
