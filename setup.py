@@ -45,7 +45,7 @@ def main():
     
     # Create required directories
     directories = [
-        "data/notifications",
+        "data/storage",
         "data/knowledge_base",
         "logs",
         "uploads",
@@ -61,7 +61,7 @@ def main():
     # Install dependencies
     if not run_command(
         f"{sys.executable} -m pip install -r requirements.txt",
-        "Installing Python dependencies"
+        "Installing Python dependencies (Compatible with 3.12.0)"
     ):
         print("\n⚠️  Some dependencies failed to install. The app may not work correctly.")
     
@@ -71,12 +71,6 @@ def main():
     run_command(
         f"{sys.executable} -m spacy download en_core_web_sm",
         "Downloading spaCy English model (small)"
-    )
-    
-    # Try to download large model (optional)
-    run_command(
-        f"{sys.executable} -m spacy download en_core_web_lg",
-        "Downloading spaCy English model (large) - Optional"
     )
     
     # Download NLTK data
@@ -101,18 +95,16 @@ def main():
         )
         if result.returncode == 0:
             print("   ✅ Tesseract is installed")
-            print(f"   Version: {result.stdout.split()[1] if result.stdout else 'Unknown'}")
         else:
             raise Exception("Not found")
     except:
         print("   ⚠️ Tesseract not found. OCR features will be limited.")
-        print("   Install from: https://github.com/UB-Mannheim/tesseract/wiki")
     
     # Final summary
     print("""
     
     ╔════════════════════════════════════════════════════════════╗
-    ║                   🎉 Setup Complete!                       ║
+    ║                   🎉 SETUP COMPLETE!                       ║
     ╠════════════════════════════════════════════════════════════╣
     ║                                                            ║
     ║  To start Legifyx:                                         ║
@@ -120,10 +112,6 @@ def main():
     ║  Windows:  run_legifyx.bat                                 ║
     ║            OR                                              ║
     ║            streamlit run app.py                            ║
-    ║                                                            ║
-    ║  Linux/Mac: ./run_legifyx.sh                               ║
-    ║             OR                                             ║
-    ║             streamlit run app.py                           ║
     ║                                                            ║
     ║  Open http://localhost:8501 in your browser                ║
     ║                                                            ║
