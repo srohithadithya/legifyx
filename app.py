@@ -155,8 +155,7 @@ def load_premium_css():
             font-weight: 600 !important;
         }
 
-        [data-testid="stSidebar"] [data-baseweb="select"] span,
-        [data-testid="stSidebar"] [data-baseweb="select"] div {
+        [data-testid="stSidebar"] [data-baseweb="select"] [data-testid="stSelectedValue"] {
             color: #FFFFFF !important;
         }
 
