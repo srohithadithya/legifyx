@@ -1,0 +1,143 @@
+SERVICE AGREEMENT
+
+This Service Agreement ("Agreement") is entered into as of January 15, 2024
+
+BETWEEN:
+
+ABC Technologies Private Limited, a company incorporated under the laws of India, having its registered office at 123 Tech Park, Bangalore, Karnataka 560001 (hereinafter referred to as the "Client")
+
+AND
+
+XYZ Consulting Services LLP, a limited liability partnership registered in India, having its principal place of business at 456 Business Center, Mumbai, Maharashtra 400001 (hereinafter referred to as the "Service Provider")
+
+WHEREAS the Client desires to engage the Service Provider to provide certain consulting services, and the Service Provider agrees to provide such services subject to the terms and conditions set forth herein.
+
+NOW, THEREFORE, in consideration of the mutual covenants and agreements hereinafter set forth, the parties agree as follows:
+
+1. SCOPE OF SERVICES
+
+1.1 The Service Provider shall provide IT consulting and software development services as detailed in Exhibit A attached hereto.
+
+1.2 The Service Provider shall deliver all services in accordance with the specifications and timelines agreed upon by both parties.
+
+1.3 The Client shall provide reasonable access to its facilities, systems, and personnel as necessary for the Service Provider to perform its obligations.
+
+2. TERM AND TERMINATION
+
+2.1 This Agreement shall commence on the Effective Date and continue for a period of twelve (12) months unless terminated earlier in accordance with this Agreement.
+
+2.2 Either party may terminate this Agreement without cause by providing sixty (60) days written notice to the other party.
+
+2.3 Either party may terminate this Agreement immediately upon written notice if the other party materially breaches any provision of this Agreement and fails to cure such breach within thirty (30) days after receiving written notice thereof.
+
+2.4 The Agreement shall automatically renew for successive one-year periods unless either party provides written notice of non-renewal at least ninety (90) days prior to the end of the then-current term.
+
+3. COMPENSATION AND PAYMENT
+
+3.1 The Client shall pay the Service Provider a monthly fee of Rs. 5,00,000 (Rupees Five Lakhs Only) plus applicable taxes for the services rendered.
+
+3.2 Payment shall be due within thirty (30) days of receipt of invoice.
+
+3.3 Late payments shall bear interest at the rate of 1.5% per month or the maximum rate permitted by law, whichever is lower.
+
+3.4 In case of delayed payment beyond sixty (60) days, a penalty of 5% of the outstanding amount shall be applicable.
+
+4. INTELLECTUAL PROPERTY
+
+4.1 All intellectual property created by the Service Provider specifically for the Client under this Agreement shall be owned by the Client upon full payment.
+
+4.2 The Service Provider retains ownership of all pre-existing intellectual property, tools, methodologies, and know-how.
+
+4.3 The Service Provider grants the Client a non-exclusive, perpetual license to use any pre-existing intellectual property incorporated into the deliverables.
+
+4.4 All work product, including source code, documentation, and designs created under this Agreement shall be considered "work made for hire" and ownership shall transfer to the Client.
+
+5. CONFIDENTIALITY
+
+5.1 Each party agrees to maintain the confidentiality of all Confidential Information disclosed by the other party.
+
+5.2 "Confidential Information" means any non-public information, technical data, trade secrets, or know-how disclosed by one party to the other.
+
+5.3 The obligations of confidentiality shall survive the termination of this Agreement for a period of five (5) years.
+
+5.4 This obligation shall not apply to information that: (a) is or becomes publicly available through no fault of the receiving party; (b) was rightfully in the receiving party's possession prior to disclosure; or (c) is required to be disclosed by law.
+
+6. INDEMNIFICATION
+
+6.1 The Service Provider shall indemnify, defend, and hold harmless the Client from and against any and all claims, damages, losses, costs, and expenses arising from the Service Provider's gross negligence or willful misconduct.
+
+6.2 The Client shall indemnify, defend, and hold harmless the Service Provider from and against any and all claims, damages, losses, costs, and expenses arising from the Client's gross negligence or willful misconduct.
+
+6.3 The indemnifying party's liability under this Section shall not exceed the total fees paid or payable under this Agreement during the twelve (12) months preceding the claim.
+
+7. LIMITATION OF LIABILITY
+
+7.1 IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.
+
+7.2 The aggregate liability of the Service Provider under this Agreement shall not exceed the total fees paid by the Client during the twelve (12) months preceding the event giving rise to the claim.
+
+7.3 The limitations in this Section shall not apply to breaches of confidentiality obligations, intellectual property infringement, or gross negligence.
+
+8. NON-COMPETE AND NON-SOLICITATION
+
+8.1 During the term of this Agreement and for a period of twelve (12) months thereafter, the Service Provider shall not directly provide similar services to the Client's direct competitors listed in Exhibit B.
+
+8.2 Neither party shall solicit or hire employees of the other party during the term and for twelve (12) months thereafter without prior written consent.
+
+9. DISPUTE RESOLUTION
+
+9.1 Any dispute arising out of or in connection with this Agreement shall first be attempted to be resolved through good faith negotiations between senior executives of both parties.
+
+9.2 If the dispute cannot be resolved through negotiation within thirty (30) days, it shall be referred to arbitration in accordance with the Arbitration and Conciliation Act, 1996.
+
+9.3 The arbitration shall be conducted by a sole arbitrator mutually agreed upon by the parties. The seat of arbitration shall be Bangalore, India.
+
+9.4 The language of arbitration shall be English. The arbitrator's decision shall be final and binding on both parties.
+
+10. GOVERNING LAW AND JURISDICTION
+
+10.1 This Agreement shall be governed by and construed in accordance with the laws of India.
+
+10.2 Subject to the arbitration clause above, the courts of Bangalore, Karnataka shall have exclusive jurisdiction over any disputes arising under this Agreement.
+
+11. GENERAL PROVISIONS
+
+11.1 Force Majeure: Neither party shall be liable for delays or failures in performance resulting from acts beyond their reasonable control.
+
+11.2 Entire Agreement: This Agreement constitutes the entire agreement between the parties and supersedes all prior negotiations, representations, and agreements.
+
+11.3 Amendment: This Agreement may only be amended in writing signed by both parties.
+
+11.4 Waiver: The failure of either party to enforce any provision of this Agreement shall not constitute a waiver of such provision.
+
+11.5 Severability: If any provision of this Agreement is held invalid or unenforceable, the remaining provisions shall continue in full force and effect.
+
+11.6 Assignment: Neither party may assign this Agreement without the prior written consent of the other party.
+
+11.7 Notices: All notices under this Agreement shall be in writing and delivered by registered mail or email to the addresses specified above.
+
+IN WITNESS WHEREOF, the parties have executed this Agreement as of the date first written above.
+
+For ABC Technologies Private Limited:
+
+_______________________________
+Name: [Authorized Signatory]
+Title: [Designation]
+Date: _______________
+
+For XYZ Consulting Services LLP:
+
+_______________________________
+Name: [Authorized Signatory]  
+Title: [Designation]
+Date: _______________
+
+WITNESSES:
+
+1. _______________________________
+   Name:
+   Address:
+
+2. _______________________________
+   Name:
+   Address:

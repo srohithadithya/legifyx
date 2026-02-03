@@ -1,0 +1,55 @@
+# Legifyx Requirements - Compatible with Python 3.9 - 3.12
+
+# Core Framework
+streamlit>=1.28.0
+watchdog>=3.0.0
+
+# NLP Libraries
+spacy>=3.7.0
+nltk>=3.8.1
+
+# Document Processing
+PyPDF2>=3.0.0
+python-docx>=1.0.0
+pdfplumber>=0.10.0
+Pillow>=10.0.0
+
+# OCR (optional - requires Tesseract installed)
+pytesseract>=0.3.10
+
+# Text-to-Speech
+pyttsx3>=2.90
+gTTS>=2.5.0
+
+# Translation
+deep-translator>=1.11.0
+
+# PDF Generation
+reportlab>=4.0.0
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Security & Encryption
+cryptography>=41.0.0
+python-dotenv>=1.0.0
+
+# Utilities
+python-dateutil>=2.8.2
+regex>=2023.10.3
+python-Levenshtein>=0.23.0
+fuzzywuzzy>=0.18.0
+
+# Visualization
+plotly>=5.18.0
+
+# Logging
+loguru>=0.7.2
+
+# Language Detection
+langdetect>=1.0.9
+
+# Text Processing
+textblob>=0.17.1
+chardet>=5.2.0
