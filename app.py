@@ -23,7 +23,7 @@ from templates.clause_templates import get_all_templates
 
 # Page Config
 st.set_page_config(
-    page_title="LEGIFYX - Legal Contract Analysis Bot",
+    page_title="LEGIFYX - Legal Contract Analysis",
     page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -577,7 +577,7 @@ def render_header():
     st.markdown("""
     <div class="brand-header">
         <div class="brand-logo">⚖️ LEGIFYX</div>
-        <div class="brand-tagline">AI-POWERED LEGAL CONTRACT ANALYSIS BOT FOR INDIAN SMEs</div>
+        <div class="brand-tagline">AI-POWERED LEGAL CONTRACT ANALYSIS</div>
         <div class="brand-badge">🛡️ SECURE • TRUSTED • ENTERPRISE GRADE</div>
     </div>
     """, unsafe_allow_html=True)
@@ -589,11 +589,10 @@ def render_footer():
     <div class="main-footer">
         <div class="footer-top">
             <div class="footer-brand">⚖️ LEGIFYX v1.0.0</div>
-            <div class="footer-contact">📧 support@legifyx.com | 📞 +91-XXX-XXX-XXXX</div>
-            <div style="color: #8BA3C7;">🇮🇳 Made in India with ❤️</div>
+            <div style="color: #8BA3C7;">Made with ❤️</div>
         </div>
         <div class="footer-bottom">
-            <div>© 2026 Legifyx. All Rights Reserved. | Designed for Indian SMEs</div>
+            <div>© 2026 Legifyx. All Rights Reserved.</div>
             <div class="footer-tech">
                 <span class="tech-badge">💾 JSON Storage</span>
                 <span class="tech-badge">🔒 AES-256 Encryption</span>
@@ -883,7 +882,7 @@ def render_templates_tab():
     """Render templates with proper styling"""
     st.markdown('<div class="section-hdr">📚 Templates & Resources</div>', unsafe_allow_html=True)
     
-    st.markdown('<div class="info-box">💡 <b style="color: #22C55E;">Download and customize</b> <span style="color: #C5D4E8;">these SME-friendly templates for your business contracts.</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="info-box">💡 <b style="color: #22C55E;">Download and customize</b> <span style="color: #C5D4E8;">these templates for your business contracts.</span></div>', unsafe_allow_html=True)
     
     tabs = st.tabs(["📝 Clause Templates", "📄 Contract Types", "📖 Legal Resources"])
     
@@ -900,7 +899,7 @@ def render_templates_tab():
                     st.markdown(f'<p style="color: #8BA3C7;"><b style="color: #D4AF37;">Variables:</b> {" | ".join(t["variables"])}</p>', unsafe_allow_html=True)
     
     with tabs[1]:
-        st.markdown('<p style="color: #C5D4E8; margin-bottom: 20px;">Available contract types for Indian SMEs:</p>', unsafe_allow_html=True)
+        st.markdown('<p style="color: #C5D4E8; margin-bottom: 20px;">Available contract types for businesses:</p>', unsafe_allow_html=True)
         items = [
             ("👔", "Employment Agreement", "For hiring employees with balanced terms"),
             ("🔧", "Service Agreement", "For engaging consultants and service providers"),

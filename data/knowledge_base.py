@@ -1,6 +1,6 @@
 """
 Legifyx Knowledge Base
-Stores common contract issues and best practices for Indian SMEs
+Stores common contract issues and best practices for businesses
 """
 
 import json
@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 class KnowledgeBase:
     """
-    Knowledge base for common contract issues faced by Indian SMEs
+    Knowledge base for common contract issues faced by businesses
     Provides guidance and best practices without external legal data
     """
     

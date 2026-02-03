@@ -23,7 +23,7 @@ for directory in [DATA_DIR, TEMPLATES_DIR, ASSETS_DIR, LOGS_DIR, UPLOADS_DIR, EX
 # Application Settings
 APP_NAME = "Legifyx"
 APP_VERSION = "1.0.0"
-APP_TAGLINE = "AI-Powered Legal Contract Analysis for SMEs"
+APP_TAGLINE = "AI-Powered Legal Contract Analysis"
 
 # Brand Colors
 BRAND_COLORS = {

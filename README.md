@@ -2,13 +2,12 @@
 
 <div align="center">
 
-**AI-Powered Legal Assistant for Indian SMEs**
+**AI-Powered Legal Assistant**
 
 [![Python 3.12.0](https://img.shields.io/badge/Python-3.12.0-blue.svg)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B.svg)](https://streamlit.io)
-[![Made in India](https://img.shields.io/badge/Made%20with%20❤️%20in-India-orange.svg)]()
 
-*Empowering SME owners to understand complex contracts, identify legal risks, and receive actionable advice in plain language.*
+*Empowering business owners to understand complex contracts, identify legal risks, and receive actionable advice in plain language.*
 
 [🚀 Quick Start](#-quick-start) • [✨ Features](#-features) • [♿ Accessibility](#-accessibility) • [📖 Usage](#-usage)
 
@@ -18,7 +17,7 @@
 
 ## 🎯 What is Legifyx?
 
-**Legifyx** is a sophisticated GenAI-powered legal contract analysis bot designed specifically for Indian Small and Medium Enterprises (SMEs). It helps business owners:
+**Legifyx** is a sophisticated GenAI-powered legal contract analysis bot. It helps business owners:
 
 - 📄 **Understand** complex legal documents in simple, plain language
 - 🚨 **Identify** hidden risks and unfavorable terms before signing
@@ -88,7 +87,7 @@
 
 ### Prerequisites
 - Python 3.12.0 (Recommended)
-- Windows / Linux / macOS
+- Windows
 
 ### Installation
 
@@ -101,10 +100,7 @@ cd legifyx
 python -m venv venv
 
 # Activate virtual environment
-# Windows:
 .\\venv\\Scripts\\activate
-# Linux/Mac:
-source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -113,18 +109,11 @@ pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 ```
 
-### Running the Application
-
-```bash
-# Windows
+# Start application
 run_legifyx.bat
-
-# Linux/Mac
-./run_legifyx.sh
 
 # OR directly
 streamlit run app.py --server.port 8501
-```
 
 Open your browser and navigate to: **http://localhost:8501**
 
@@ -312,8 +301,6 @@ Key packages:
 ### Voice Not Working
 - Install: `pip install pyttsx3 gTTS`
 - Windows: Ensure Microsoft Speech API is available
-- macOS: Use `say` command fallback
-- Linux: Install `espeak`: `sudo apt-get install espeak`
 
 ### OCR Not Working
 - Install Tesseract: https://github.com/tesseract-ocr/tesseract
@@ -338,14 +325,13 @@ Key packages:
 ## 📞 Support
 
 For support or questions:
-- 📧 Email: support@legifyx.com
 - 🐛 Issues: https://github.com/srohithadithya/legifyx/issues
 
 ---
 
 <div align="center">
 
-**Made with ❤️ for Indian SMEs**
+**Made with ❤️**
 
 ⚖️ **LEGIFYX** - *Simplifying Legal Complexity*
 
