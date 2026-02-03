@@ -2,18 +2,15 @@
 
 <div align="center">
 
-![Legifyx Logo](assets/logo.png)
-
 **AI-Powered Legal Assistant for Indian SMEs**
 
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B.svg)](https://streamlit.io)
-[![License](https://img.shields.io/badge/License-Proprietary-gold.svg)]()
 [![Made in India](https://img.shields.io/badge/Made%20with%20❤️%20in-India-orange.svg)]()
 
 *Empowering SME owners to understand complex contracts, identify legal risks, and receive actionable advice in plain language.*
 
-[🚀 Quick Start](#-quick-start) • [✨ Features](#-features) • [♿ Accessibility](#-accessibility) • [📖 Documentation](#-documentation)
+[🚀 Quick Start](#-quick-start) • [✨ Features](#-features) • [♿ Accessibility](#-accessibility) • [📖 Usage](#-usage)
 
 </div>
 
@@ -63,22 +60,27 @@
 
 ### ♿ Accessibility Features
 **Designed with visually impaired users in mind:**
-- 🔊 **Voice Navigation** - Navigate the entire application using voice cues
+- 🔊 **Voice Navigation** - Navigate the application using voice cues
 - 📖 **Auto-Read Results** - Automatically speaks analysis findings
 - 🎤 **Text-to-Speech** - Hear any content read aloud
-- 🔆 **High Contrast Mode** - Enhanced visibility options
-- 🔤 **Large Text Mode** - Increased font sizes
+- ⚡ **Adjustable Speech Rate** - Control voice speed (100-250 words/min)
+- 🔊 **Voice Test** - Test TTS before using
 
 ### 📤 Export Options
-- **PDF Reports** - Professional, branded analysis reports
-- **JSON Data** - Structured data for integration
-- **Audio Summaries** - MP3 audio files of contract summaries
+- **PDF Reports** - Professional, branded analysis reports with risk summaries
+- **JSON Data** - Structured data including analysis metadata, scores, and recommendations
+- **Audio Summaries** - MP3 audio files of contract summaries in multiple languages
+
+### 📚 Templates & Resources
+- **Clause Templates** - 8 standard balanced clauses (Liability, Termination, Indemnity, etc.)
+- **Contract Types** - 8 common SME contracts (Employment, Service, Vendor, NDA, etc.)
+- **Legal Frameworks** - Information on 4 key Indian laws (Contract Act, Arbitration Act, IT Act, Consumer Protection)
 
 ### 🔒 Security & Privacy
-- **AES-256 Encryption** - All documents encrypted at rest
+- **AES-256 Encryption** - Sensitive data encrypted at rest
 - **Audit Logging** - Complete trail of all actions
-- **Secure Deletion** - Proper cleanup of temporary files
-- **No Data Storage** - Documents not retained after analysis
+- **Local JSON Storage** - No external database required
+- **Secure File Handling** - Proper cleanup of temporary files
 
 ---
 
@@ -87,13 +89,12 @@
 ### Prerequisites
 - Python 3.9 - 3.12
 - Windows / Linux / macOS
-- [Tesseract OCR](https://github.com/UB-Mannheim/tesseract/wiki) (optional, for image processing)
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/legifyx.git
+git clone https://github.com/srohithadithya/legifyx.git
 cd legifyx
 
 # Create virtual environment
@@ -101,7 +102,7 @@ python -m venv venv
 
 # Activate virtual environment
 # Windows:
-.\venv\Scripts\activate
+.\\venv\\Scripts\\activate
 # Linux/Mac:
 source venv/bin/activate
 
@@ -118,6 +119,9 @@ python -m spacy download en_core_web_sm
 # Windows
 run_legifyx.bat
 
+# Linux/Mac
+./run_legifyx.sh
+
 # OR directly
 streamlit run app.py --server.port 8501
 ```
@@ -126,15 +130,69 @@ Open your browser and navigate to: **http://localhost:8501**
 
 ---
 
+## 📖 Usage
+
+### 1. Upload Contract
+- Click on **📤 Upload** tab
+- Drag and drop or browse for your contract file
+- Supported formats: PDF, DOCX, DOC, TXT, JPG, PNG
+- Click **🔍 ANALYZE CONTRACT**
+
+### 2. Review Results
+- Navigate to **📊 Results** tab
+- View overall risk score and classification
+- Review critical issues and recommendations
+- Read executive summary
+
+### 3. Access Templates
+- Go to **📚 Templates** tab
+- Browse clause templates for reference
+- View contract types available
+- Learn about relevant Indian laws
+
+### 4. Export Analysis
+- In Results tab, click **📤 Export**
+- Choose format:
+  - **📄 Generate PDF** - Downloadable professional report
+  - **📋 Download JSON** - Structured data export
+  - **🔊 Generate Audio** - MP3 summary (requires gTTS)
+
+### 5. View History
+- Check **📜 History** tab
+- See all previously analyzed contracts
+- Review past risk scores
+- Clear history if needed
+
+---
+
+## ♿ Accessibility Mode
+
+Legifyx is designed to be accessible for visually impaired users:
+
+### Enabling Accessibility Mode
+1. Open the sidebar (left panel)
+2. Toggle **\"🔊 Enable Accessibility Mode\"**
+3. Configure options:
+   - ✅ **Voice Navigation** - Hear navigation announcements
+   - ✅ **Auto-Read Results** - Automatically read analysis findings
+   - 🔈 **Voice Speed** - Adjust speech rate (100-250)
+   - 🔊 **Test Voice** - Verify TTS is working
+
+### Using Voice Features
+- Use **🎤** buttons throughout the app to hear content
+- Analysis results can be auto-read when enabled
+- Export audio summaries for offline listening
+
+---
+
 ## 📁 Project Structure
 
 ```
 legifyx/
 ├── app.py                          # Main Streamlit application
-├── setup.py                        # Setup and initialization script
 ├── requirements.txt                # Python dependencies
 ├── run_legifyx.bat                 # Windows launcher
-├── run_legifyx.sh                  # Linux/Mac launcher
+├── .gitignore                      # Git ignore rules
 │
 ├── config/
 │   └── settings.py                 # Application configuration
@@ -146,15 +204,13 @@ legifyx/
 │   └── entity_extractor.py         # Named entity extraction
 │
 ├── services/
-│   ├── document_parser.py          # PDF, DOCX, TXT parsing
+│   ├── document_parser.py          # PDF, DOCX, TXT, Image parsing
 │   ├── ocr_service.py              # Image OCR processing
 │   ├── translation.py              # Multilingual translation
-│   ├── tts_service.py              # Text-to-speech accessibility
-│   └── notification_service.py     # Real-time notifications
+│   └── tts_service.py              # Text-to-speech accessibility
 │
 ├── templates/
-│   ├── clause_templates.py         # Standard clause templates
-│   └── contract_templates/         # Full contract templates
+│   └── clause_templates.py         # Standard clause templates
 │
 ├── utils/
 │   ├── pdf_generator.py            # PDF report generation
@@ -162,10 +218,11 @@ legifyx/
 │   └── encryption.py               # Data encryption utilities
 │
 ├── data/
-│   └── knowledge_base.py           # SME knowledge base
+│   ├── knowledge_base.py           # SME knowledge base
+│   └── storage/                    # JSON storage directory
 │
-├── assets/
-│   └── logo.png                    # Legifyx brand logo
+├── exports/                        # Generated PDF reports
+├── audio_output/                   # Generated audio files
 │
 └── samples/
     └── sample_service_agreement.txt # Sample contract for testing
@@ -173,86 +230,98 @@ legifyx/
 
 ---
 
-## ♿ Accessibility Mode
-
-Legifyx is designed to be fully accessible for visually impaired users:
-
-### Enabling Accessibility Mode
-1. Open the sidebar (☰ icon)
-2. Check **"🔊 Enable Accessibility Mode"**
-3. Configure additional options:
-   - **Voice Navigation** - Hear navigation announcements
-   - **Auto-Read Results** - Automatically read analysis findings
-   - **Voice Speed** - Adjust speech rate (100-250)
-   - **High Contrast Mode** - Enhanced color contrast
-   - **Large Text Mode** - Increased font sizes
-
-### Voice Commands
-Throughout the application, look for **🎤 Voice** buttons to:
-- Hear page descriptions
-- Listen to analysis results
-- Navigate sections
-- Download audio summaries
-
----
-
 ## 🛡️ Compliance & Legal Framework
 
-Legifyx checks contracts against key Indian legal frameworks:
+Legifyx references key Indian legal frameworks:
 
 | Law/Regulation | Coverage |
 |----------------|----------|
-| **Indian Contract Act, 1872** | Contract validity, enforceability |
-| **Arbitration and Conciliation Act, 1996** | Dispute resolution clauses |
-| **Indian Stamp Act** | Stamp duty requirements |
-| **Registration Act, 1908** | Registration requirements |
-| **Information Technology Act, 2000** | E-contracts, digital signatures |
-| **Consumer Protection Act, 2019** | Consumer contract terms |
+| **Indian Contract Act, 1872** | Contract validity, enforceability, lawful consideration |
+| **Arbitration and Conciliation Act, 1996** | Dispute resolution clauses, arbitration agreements |
+| **Information Technology Act, 2000** | E-contracts, digital signatures, data protection |
+| **Consumer Protection Act, 2019** | Unfair contract terms, consumer rights |
 
 ---
 
 ## 📋 Supported File Formats
 
-| Format | Extension | Description |
-|--------|-----------|-------------|
+| Format | Extension | Notes |
+|--------|-----------|-------|
 | PDF | `.pdf` | Standard PDF documents |
 | Word | `.docx`, `.doc` | Microsoft Word documents |
 | Text | `.txt` | Plain text files |
-| Images | `.jpg`, `.jpeg`, `.png` | Scanned documents (OCR) |
+| Images | `.jpg`, `.png` | Scanned documents (requires Tesseract OCR) |
 
 ---
 
 ## 🔧 Configuration
 
-Copy `.env.example` to `.env` and customize:
+### Environment Variables
+Create a `.env` file (optional):
 
 ```env
 # Application Settings
 APP_ENV=production
 DEBUG=false
 
-# OCR Settings (if Tesseract not in PATH)
-TESSERACT_PATH=C:\Program Files\Tesseract-OCR\tesseract.exe
-
-# Security
-ENCRYPTION_ENABLED=true
-AUDIT_LOGGING=true
-
 # File Limits
 MAX_FILE_SIZE_MB=50
+
+# OCR Settings (if Tesseract installed separately)
+TESSERACT_PATH=C:\\Program Files\\Tesseract-OCR\\tesseract.exe
 ```
 
+### Storage
+- Analysis history stored in: `data/storage/history.json`
+- PDF reports saved to: `exports/`
+- Audio files saved to: `audio_output/`
+
 ---
 
-## 🤝 Contributing
+## 🔍 How It Works
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+1. **Document Parsing**: Extracts text from uploaded files using PyPDF2, python-docx, pdfplumber, and Tesseract OCR
+2. **NLP Processing**: Uses spaCy for tokenization, entity recognition, and clause extraction
+3. **Risk Analysis**: Scores clauses based on keywords, patterns, and legal frameworks
+4. **Report Generation**: Creates formatted reports using ReportLab
+5. **Audio Generation**: Converts text to speech using pyttsx3 (local) and gTTS (files)
 
 ---
 
-## 📄 License
+## 📦 Dependencies
 
-This project is proprietary software. Unauthorized copying, modification, or distribution is prohibited.
+Key packages:
+- **streamlit** - Web interface
+- **spacy** - NLP engine
+- **nltk** - Natural language toolkit
+- **PyPDF2** - PDF parsing
+- **python-docx** - Word document parsing
+- **pdfplumber** - Advanced PDF extraction
+- **Pillow** - Image processing
+- **pytesseract** - OCR (optional)
+- **pyttsx3** - Text-to-speech (local)
+- **gTTS** - Text-to-speech (MP3 files)
+- **deep-translator** - Translation service
+- **reportlab** - PDF generation
+- **cryptography** - Encryption utilities
+
+---
+
+## 🐛 Troubleshooting
+
+### Voice Not Working
+- Install: `pip install pyttsx3 gTTS`
+- Windows: Ensure Microsoft Speech API is available
+- macOS: Use `say` command fallback
+- Linux: Install `espeak`: `sudo apt-get install espeak`
+
+### OCR Not Working
+- Install Tesseract: https://github.com/tesseract-ocr/tesseract
+- Add to PATH or set `TESSERACT_PATH` in `.env`
+
+### PDF Generation Failing
+- Ensure ReportLab is installed: `pip install reportlab`
+- Check write permissions in `exports/` folder
 
 ---
 
@@ -262,14 +331,15 @@ This project is proprietary software. Unauthorized copying, modification, or dis
 - **NLTK** - Natural Language Toolkit
 - **Streamlit** - Beautiful web applications
 - **ReportLab** - PDF generation
+- **Google TTS** - Text-to-speech service
 
 ---
 
 ## 📞 Support
 
-For support, please contact:
+For support or questions:
 - 📧 Email: support@legifyx.com
-- 📱 Phone: +91-XXX-XXX-XXXX
+- 🐛 Issues: https://github.com/srohithadithya/legifyx/issues
 
 ---
 
@@ -278,5 +348,7 @@ For support, please contact:
 **Made with ❤️ for Indian SMEs**
 
 ⚖️ **LEGIFYX** - *Simplifying Legal Complexity*
+
+© 2026 Legifyx. All Rights Reserved.
 
 </div>
