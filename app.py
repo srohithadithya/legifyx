@@ -46,7 +46,17 @@ def load_premium_css():
             background: linear-gradient(135deg, #0A1628 0%, #0D2137 50%, #112940 100%);
         }
         
-        #MainMenu, footer, header { visibility: hidden; }
+        /* Hide Main Menu and Footer but KEEP Header for Sidebar Toggle */
+        #MainMenu, footer { visibility: hidden; }
+        header { background: transparent !important; }
+        
+        /* Fix Sidebar Toggle Button Visibility */
+        [data-testid="stHeader"] button {
+            color: #D4AF37 !important;
+        }
+        [data-testid="stHeader"] {
+            background: rgba(0,0,0,0) !important;
+        }
         
         /* === MAIN HEADER === */
         .brand-header {
@@ -109,6 +119,7 @@ def load_premium_css():
         [data-testid="stSidebar"] p,
         [data-testid="stSidebar"] span {
             color: #FFFFFF !important;
+            opacity: 1 !important;
         }
         
         [data-testid="stSidebar"] h3 {
@@ -128,8 +139,9 @@ def load_premium_css():
             color: #FFFFFF !important;
         }
         
-        [data-testid="stSidebar"] .stSlider span {
-            color: #C5D4E8 !important;
+        [data-testid="stSidebar"] .stSlider span,
+        [data-testid="stSidebar"] .stSlider p {
+            color: #FFFFFF !important;
         }
         
         [data-testid="stSidebar"] div[data-testid="stNotification"] {
