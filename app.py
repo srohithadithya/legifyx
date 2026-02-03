@@ -46,17 +46,33 @@ def load_premium_css():
             background: linear-gradient(135deg, #0A1628 0%, #0D2137 50%, #112940 100%);
         }
         
-        /* Hide Main Menu and Footer but KEEP Header for Sidebar Toggle */
-        #MainMenu, footer { visibility: hidden; }
-        header { background: transparent !important; }
-        
-        /* Fix Sidebar Toggle Button Visibility (Hamburger menu) */
-        [data-testid="stHeader"] button svg {
-            fill: #D4AF37 !important;
-            stroke: #D4AF37 !important;
+        /* FORCE SIDEBAR TOGGLE VISIBILITY */
+        header[data-testid="stHeader"] {
+            display: flex !important;
+            visibility: visible !important;
+            background: rgba(0,0,0,0) !important;
         }
-        [data-testid="stHeader"] {
-            background: transparent !important;
+        
+        #MainMenu, footer {
+            display: none !important;
+            visibility: hidden !important;
+        }
+        
+        /* THE ULTIMATE TOGGLE FIX */
+        [data-testid="stSidebarCollapseButton"],
+        [data-testid="stHeader"] button,
+        button[aria-label="Open sidebar"],
+        button[aria-label="Close sidebar"] {
+            color: #D4AF37 !important;
+            fill: #D4AF37 !important;
+            background-color: rgba(212, 175, 55, 0.15) !important;
+            border-radius: 50% !important;
+            z-index: 999999 !important;
+        }
+        
+        [data-testid="stHeader"] svg {
+            fill: #D4AF37 !important;
+            color: #D4AF37 !important;
         }
         
         /* === MAIN HEADER === */
@@ -161,8 +177,19 @@ def load_premium_css():
             font-weight: 600 !important;
         }
 
-        /* Ensure dropdown text is visible but background is NOT white */
-        [data-testid="stSidebar"] div[data-baseweb="select"] div {
+        /* Fix Selectbox White-out (Extreme) */
+        [data-testid="stSidebar"] div[data-baseweb="select"] {
+            background-color: #112940 !important;
+            border: 1px solid rgba(212, 175, 55, 0.3) !important;
+            border-radius: 8px !important;
+        }
+        
+        [data-testid="stSidebar"] div[data-baseweb="select"] * {
+            background: transparent !important;
+            color: #FFFFFF !important;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stSelectedValue"] {
             color: #FFFFFF !important;
         }
         
