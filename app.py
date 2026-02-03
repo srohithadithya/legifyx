@@ -39,48 +39,66 @@ def load_premium_css():
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
         
-        /* === GLOBAL STYLES === */
         .stApp {
             background: linear-gradient(135deg, #0A1628 0%, #0D2137 50%, #112940 100%);
         }
-        
-        /* FORCE SIDEBAR TOGGLE VISIBILITY */
-        header[data-testid="stHeader"] {
-            visibility: visible !important;
-            background: transparent !important;
-        }
-        
+
+        /* Hide Main Menu and Footer */
         #MainMenu, footer {
             display: none !important;
             visibility: hidden !important;
         }
-        
-        /* THE ULTIMATE TOGGLE FIX */
-        [data-testid="stSidebarCollapseButton"],
-        button[aria-label="Open sidebar"],
-        button[aria-label="Close sidebar"] {
-            color: #D4AF37 !important;
-            fill: #D4AF37 !important;
-            background-color: rgba(212, 175, 55, 0.15) !important;
-            border-radius: 50% !important;
+
+        /* FORCE SIDEBAR TOGGLE & HEADER VISIBILITY */
+        header[data-testid="stHeader"] {
+            visibility: visible !important;
+            background: transparent !important;
             z-index: 999999 !important;
-            width: 40px !important;
-            height: 40px !important;
+        }
+        
+        /* THE ULTIMATE HEADER & TOGGLE FIX */
+        [data-testid="stHeader"], 
+        header[data-testid="stHeader"], 
+        header {
+            visibility: visible !important;
             display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
+            background: transparent !important;
+            z-index: 999999 !important;
         }
 
-        /* HEADER BUTTONS (Share, Deploy, etc.) */
-        [data-testid="stHeader"] button,
-        [data-testid="stHeader"] button span,
-        [data-testid="stHeader"] button div {
+        header button, 
+        header button p, 
+        header button span, 
+        header button div,
+        [data-testid="stHeader"] button * {
             color: #D4AF37 !important;
+            fill: #D4AF37 !important;
+            opacity: 1 !important;
+            font-weight: 700 !important;
         }
-        
+
+        header button {
+            background-color: rgba(10, 22, 40, 0.9) !important;
+            border: 1px solid rgba(212, 175, 55, 0.4) !important;
+            border-radius: 8px !important;
+            padding: 5px 15px !important;
+            margin: 0 5px !important;
+        }
+
+        header svg, 
         [data-testid="stHeader"] svg {
             fill: #D4AF37 !important;
             color: #D4AF37 !important;
+            opacity: 1 !important;
+        }
+
+        [data-testid="stSidebarCollapseButton"],
+        button[aria-label="Open sidebar"],
+        button[aria-label="Close sidebar"] {
+            background-color: rgba(212, 175, 55, 0.2) !important;
+            border-radius: 50% !important;
+            width: 45px !important;
+            height: 45px !important;
         }
         
         /* === MAIN HEADER === */
