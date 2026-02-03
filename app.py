@@ -29,12 +29,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-
-
-
-
 def load_premium_css():
-    """Premium hackathon-ready CSS with fixed navigation colors"""
     st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
@@ -667,9 +662,6 @@ def init_state():
         if k not in st.session_state:
             st.session_state[k] = v
 
-
-
-
 def speak(text):
     """Speak if accessibility enabled"""
     if st.session_state.get('acc_mode') and st.session_state.get('voice_on'):
@@ -680,7 +672,6 @@ def speak(text):
         except:
             pass
 
-
 def render_header():
     """Render premium header"""
     st.markdown("""
@@ -690,7 +681,6 @@ def render_header():
         <div class="brand-badge">🛡️ SECURE • TRUSTED • ENTERPRISE GRADE</div>
     </div>
     """, unsafe_allow_html=True)
-
 
 def render_footer():
     """Render premium footer"""
@@ -710,7 +700,6 @@ def render_footer():
         </div>
     </div>
     """, unsafe_allow_html=True)
-
 
 def render_sidebar():
     """Render sidebar"""
@@ -744,7 +733,6 @@ def render_sidebar():
         lang = st.selectbox("Output", list(SUPPORTED_LANGUAGES.keys()), format_func=lambda x: SUPPORTED_LANGUAGES[x])
         
         return lang
-
 
 def render_upload_tab():
     """Render upload tab"""
@@ -1032,10 +1020,6 @@ def render_templates_tab():
                 </div>
             </div>
             ''', unsafe_allow_html=True)
-
-
-
-
 
 def main():
     """Main entry"""
