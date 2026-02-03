@@ -46,9 +46,8 @@ def load_premium_css():
         
         /* FORCE SIDEBAR TOGGLE VISIBILITY */
         header[data-testid="stHeader"] {
-            display: flex !important;
             visibility: visible !important;
-            background: rgba(0,0,0,0) !important;
+            background: transparent !important;
         }
         
         #MainMenu, footer {
@@ -58,7 +57,6 @@ def load_premium_css():
         
         /* THE ULTIMATE TOGGLE FIX */
         [data-testid="stSidebarCollapseButton"],
-        [data-testid="stHeader"] button,
         button[aria-label="Open sidebar"],
         button[aria-label="Close sidebar"] {
             color: #D4AF37 !important;
@@ -66,6 +64,18 @@ def load_premium_css():
             background-color: rgba(212, 175, 55, 0.15) !important;
             border-radius: 50% !important;
             z-index: 999999 !important;
+            width: 40px !important;
+            height: 40px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        /* HEADER BUTTONS (Share, Deploy, etc.) */
+        [data-testid="stHeader"] button,
+        [data-testid="stHeader"] button span,
+        [data-testid="stHeader"] button div {
+            color: #D4AF37 !important;
         }
         
         [data-testid="stHeader"] svg {
