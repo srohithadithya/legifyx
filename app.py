@@ -107,8 +107,7 @@ def load_premium_css():
         [data-testid="stSidebar"] h3,
         [data-testid="stSidebar"] label,
         [data-testid="stSidebar"] p,
-        [data-testid="stSidebar"] span,
-        [data-testid="stSidebar"] div {
+        [data-testid="stSidebar"] span {
             color: #FFFFFF !important;
         }
         
@@ -142,6 +141,11 @@ def load_premium_css():
         [data-testid="stSidebar"] div[data-testid="stNotification"] p {
             color: #FFFFFF !important;
             font-weight: 600 !important;
+        }
+
+        [data-testid="stSidebar"] [data-baseweb="select"] span,
+        [data-testid="stSidebar"] [data-baseweb="select"] div {
+            color: #FFFFFF !important;
         }
 
         /* Sidebar Toggle/Slider handle fix */
@@ -437,8 +441,9 @@ def load_premium_css():
             background: linear-gradient(135deg, rgba(10, 22, 40, 0.98), rgba(7, 16, 24, 0.99));
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 18px;
-            padding: 30px;
-            margin-top: 50px;
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 10px;
             text-align: center;
         }
         
@@ -465,7 +470,7 @@ def load_premium_css():
         }
         
         .footer-bottom {
-            padding-top: 20px;
+            padding-top: 15px;
             color: #6B7D95;
             font-size: 0.8rem;
         }
@@ -473,8 +478,8 @@ def load_premium_css():
         .footer-tech {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 15px;
+            gap: 20px;
+            margin-top: 10px;
             flex-wrap: wrap;
         }
         
