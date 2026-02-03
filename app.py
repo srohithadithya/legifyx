@@ -1,6 +1,6 @@
 """
-LEGIFYX - AI-Powered Legal Contract Analysis Bot
-Hackathon-Ready Version with Fixed Navigation & Premium UI
+LEGIFYX - AI-Powered Legal Contract Analysis
+Streamlit-Ready Premium Version
 """
 
 import streamlit as st
@@ -23,16 +23,14 @@ from templates.clause_templates import get_all_templates
 
 # Page Config
 st.set_page_config(
-    page_title="LEGIFYX - Legal Contract Analysis Bot",
+    page_title="LEGIFYX - Legal Contract Analysis",
     page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Storage
-DATA_DIR = Path(__file__).parent / "data" / "storage"
-DATA_DIR.mkdir(parents=True, exist_ok=True)
-HISTORY_FILE = DATA_DIR / "history.json"
+
+
 
 
 def load_premium_css():
@@ -631,7 +629,7 @@ def init_state():
     """Initialize session state"""
     defaults = {
         'result': None,
-        'history': load_json(HISTORY_FILE, []),
+        'history': [],
         'acc_mode': False,
         'voice_on': False,
         'auto_read': False,
@@ -642,24 +640,6 @@ def init_state():
             st.session_state[k] = v
 
 
-def load_json(path, default):
-    """Load JSON file"""
-    if path.exists():
-        try:
-            with open(path) as f:
-                return json.load(f)
-        except:
-            pass
-    return default
-
-
-def save_json(path, data):
-    """Save JSON file"""
-    try:
-        with open(path, 'w') as f:
-            json.dump(data[-100:], f, indent=2)
-    except:
-        pass
 
 
 def speak(text):
@@ -695,9 +675,7 @@ def render_footer():
         <div class="footer-bottom">
             <div>© 2026 Legifyx. All Rights Reserved.</div>
             <div class="footer-tech">
-                <span class="tech-badge">💾 JSON Storage</span>
-                <span class="tech-badge">🔒 AES-256 Encryption</span>
-                <span class="tech-badge">🐍 Python 3.12.0</span>
+                <span class="tech-badge"> Python 3.12.0</span>
                 <span class="tech-badge">🤖 spaCy NLP</span>
                 <span class="tech-badge">♿ TTS Accessibility</span>
             </div>
@@ -736,25 +714,6 @@ def render_sidebar():
         st.markdown("---")
         st.markdown("### 🌐 Language")
         lang = st.selectbox("Output", list(SUPPORTED_LANGUAGES.keys()), format_func=lambda x: SUPPORTED_LANGUAGES[x])
-        
-        st.markdown("---")
-        st.markdown("### 📊 Stats")
-        st.markdown(f"""
-        <div class="metric-card">
-            <div class="metric-val">{len(st.session_state.history)}</div>
-            <div class="metric-lbl">Analyzed</div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("---")
-        st.markdown("### 💾 Storage")
-        st.markdown("""
-        <div style="font-size: 0.75rem; color: #8BA3C7; background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 8px;">
-            <strong>Type:</strong> JSON Files<br>
-            <strong>Encryption:</strong> AES-256<br>
-            <strong>Location:</strong> Local Storage
-        </div>
-        """, unsafe_allow_html=True)
         
         return lang
 
@@ -820,7 +779,7 @@ def render_upload_tab():
                         'level': result.risk_result.risk_level.value if result.risk_result else 'unknown',
                         'type': result.contract_type
                     })
-                    save_json(HISTORY_FILE, st.session_state.history)
+
                     prog.progress(100)
                     
                     st.success("✅ Complete! See Results tab.")
@@ -1047,28 +1006,7 @@ def render_templates_tab():
             ''', unsafe_allow_html=True)
 
 
-def render_history_tab():
-    """Render history"""
-    st.markdown('<div class="section-hdr">📜 History</div>', unsafe_allow_html=True)
-    st.markdown('<div class="info-box">💾 <b>Storage:</b> Your analysis history is stored securely in local JSON files.</div>', unsafe_allow_html=True)
-    
-    hist = st.session_state.history
-    if hist:
-        for h in reversed(hist[-15:]):
-            col = "#22C55E" if h['score'] < 4 else "#EAB308" if h['score'] < 7 else "#EF4444"
-            st.markdown(f"""
-            <div class="premium-card" style="display: flex; justify-content: space-between;">
-                <div><b style="color: #FFF;">📄 {h['file']}</b><br><span style="color: #8BA3C7; font-size: 0.8rem;">{h['time'][:16]}</span></div>
-                <div style="text-align: right;"><span style="font-size: 1.5rem; font-weight: 700; color: {col};">{h['score']:.1f}</span><br><span style="color: #8BA3C7; font-size: 0.7rem;">{h['level'].upper()}</span></div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        if st.button("🗑️ Clear"):
-            st.session_state.history = []
-            save_json(HISTORY_FILE, [])
-            st.rerun()
-    else:
-        st.info("No history yet.")
+
 
 
 def main():
@@ -1083,12 +1021,11 @@ def main():
             speak("Welcome to Legifyx. Accessibility enabled.")
             st.session_state.welcomed = True
     
-    tabs = st.tabs(["📤 Upload", "📊 Results", "📚 Templates", "📜 History"])
+    tabs = st.tabs(["📤 Upload", "📊 Results", "📚 Templates"])
     
     with tabs[0]: render_upload_tab()
     with tabs[1]: render_results_tab()
     with tabs[2]: render_templates_tab()
-    with tabs[3]: render_history_tab()
     
     render_footer()
 
