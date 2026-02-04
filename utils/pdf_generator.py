@@ -18,16 +18,32 @@ class PDFGenerator:
         self.output_dir = Path(output_dir) if output_dir else Path.cwd() / "exports"
         self.output_dir.mkdir(parents=True, exist_ok=True)
     
+    def _clean_text(self, text: str) -> str:
+        """Clean and escape text for ReportLab Paragraphs"""
+        if not text:
+            return ""
+        
+        # Basic XML escaping
+        import html
+        text = html.escape(text)
+        
+        # Restore some basic formatting that Paragraph supports
+        # Handle line breaks
+        text = text.replace('\n', '<br/>')
+        
+        # Handle Bold (Markdown style **text**)
+        # Using a simple approach for now
+        import re
+        text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', text)
+        
+        # Handle Headers (### Header)
+        text = re.sub(r'###\s*(.*?)(?:<br/>|$)', r'<b>\1</b><br/>', text)
+        
+        return text
+
     def generate_report(self, analysis_result, output_filename: str = None) -> Optional[str]:
         """
         Generate comprehensive PDF report
-        
-        Args:
-            analysis_result: AnalysisResult object
-            output_filename: Optional output filename
-        
-        Returns:
-            Path to generated PDF
         """
         if not output_filename:
             output_filename = f"legifyx_report_{analysis_result.contract_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
@@ -76,6 +92,10 @@ class PDFGenerator:
                 ["Language:", analysis_result.language.upper()]
             ]
             
+            # Clean metadata values
+            for i in range(len(meta_data)):
+                meta_data[i][1] = str(meta_data[i][1])
+            
             meta_table = Table(meta_data, colWidths=[2*inch, 4*inch])
             meta_table.setStyle(TableStyle([
                 ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
@@ -118,46 +138,65 @@ class PDFGenerator:
             elements.append(Spacer(1, 20))
             
             # Executive Summary
-            elements.append(Paragraph("Executive Summary", heading_style))
-            summary_text = analysis_result.executive_summary.replace('\n', '<br/>')
-            elements.append(Paragraph(summary_text, body_style))
+            try:
+                elements.append(Paragraph("Executive Summary", heading_style))
+                summary_html = self._clean_text(analysis_result.executive_summary)
+                elements.append(Paragraph(summary_html, body_style))
+            except Exception as e:
+                logger.error(f"Error adding summary: {e}")
+                elements.append(Paragraph("[Summary data error]", body_style))
+            
             elements.append(Spacer(1, 15))
             
             # Critical Clauses
             if analysis_result.critical_clauses:
-                elements.append(Paragraph("Critical Clauses Requiring Attention", heading_style))
-                for clause in analysis_result.critical_clauses[:5]:
-                    clause_text = f"<b>Clause {clause['clause_id']}</b> (Risk: {clause['risk_level'].upper()})<br/>{clause['text']}"
-                    elements.append(Paragraph(clause_text, body_style))
-                    elements.append(Spacer(1, 10))
+                try:
+                    elements.append(Paragraph("Critical Clauses Requiring Attention", heading_style))
+                    for clause in analysis_result.critical_clauses[:10]:
+                        cleaned_clause = self._clean_text(clause.get('text', 'No text available'))
+                        clause_id = clause.get('clause_id', 'Unknown')
+                        risk_lvl = clause.get('risk_level', 'unknown').upper()
+                        clause_html = f"<b>Clause {clause_id}</b> (Risk: {risk_lvl})<br/>{cleaned_clause}"
+                        elements.append(Paragraph(clause_html, body_style))
+                        elements.append(Spacer(1, 10))
+                except Exception as e:
+                    logger.error(f"Error adding clauses: {e}")
             
             # Recommendations
             if analysis_result.recommendations:
-                elements.append(PageBreak())
-                elements.append(Paragraph("Recommendations", heading_style))
-                for i, rec in enumerate(analysis_result.recommendations, 1):
-                    elements.append(Paragraph(f"{i}. {rec}", body_style))
-                elements.append(Spacer(1, 15))
+                try:
+                    if len(elements) > 15: # Add page break if many elements
+                        elements.append(PageBreak())
+                    elements.append(Paragraph("Recommendations", heading_style))
+                    for i, rec in enumerate(analysis_result.recommendations, 1):
+                        cleaned_rec = self._clean_text(rec)
+                        elements.append(Paragraph(f"{i}. {cleaned_rec}", body_style))
+                    elements.append(Spacer(1, 15))
+                except Exception as e:
+                    logger.error(f"Error adding recommendations: {e}")
             
             # Plain Language Summary
-            elements.append(Paragraph("Plain Language Summary", heading_style))
-            plain_text = analysis_result.plain_language_summary.replace('\n', '<br/>').replace('###', '<b>').replace('**', '')
-            elements.append(Paragraph(plain_text, body_style))
+            try:
+                elements.append(Paragraph("Plain Language Summary", heading_style))
+                plain_html = self._clean_text(analysis_result.plain_language_summary)
+                elements.append(Paragraph(plain_html, body_style))
+            except Exception as e:
+                logger.error(f"Error adding plain summary: {e}")
             
             # Footer
             elements.append(Spacer(1, 30))
             footer_text = f"<i>Generated by Legifyx on {datetime.now().strftime('%Y-%m-%d %H:%M')}. This report is for informational purposes only and does not constitute legal advice.</i>"
             elements.append(Paragraph(footer_text, ParagraphStyle('Footer', parent=body_style, fontSize=8, textColor=colors.gray)))
-            
             doc.build(elements)
-            
             return str(output_path)
-        
+            
         except ImportError:
             logger.error("ReportLab not installed. Run: pip install reportlab")
             return None
         except Exception as e:
             logger.error(f"PDF generation failed: {e}")
+            import traceback
+            logger.error(traceback.format_exc())
             return None
     
     def generate_summary_pdf(self, summary_text: str, contract_id: str) -> Optional[str]:
