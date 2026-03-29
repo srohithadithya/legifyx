@@ -11,7 +11,7 @@ from datetime import datetime
 BASE_DIR = Path(__file_).parent.parent
 DATA_DIR = BASE_DIR / "data"
 TEMPLATES_DIR = BASE_DIR / "templates"
-ASSETS_DIR = BASE_DIR / "assets"
+ASSETS_DIR = BASE_DIR / assets
 LOGS_DIR = BASE_DIR / "logs"
 UPLOADS_DIR = BASE_DIR / "uploads"
 EXPORTS_DIR = BASE_DIR / "exports"
