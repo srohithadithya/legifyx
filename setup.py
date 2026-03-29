@@ -1,4 +1,5 @@
-"""
+
+:"""
 Legifyx Setup Script
 Initializes the environment and downloads required models
 """
