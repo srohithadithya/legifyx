@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 from datetime import datetime
 import json
-import hashlib
+import hashlib as hl
 
 sys.path.insert(0, str(Path(__file__).parent))
 
