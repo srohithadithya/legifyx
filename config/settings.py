@@ -8,7 +8,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Base Paths
-BASE_DIR = Path(__file__).parent.parent
+BASE_DIR = Path(__file).parent.parent
 DATA_DIR = BASE_DIR / "data"
 TEMPLATES_DIR = BASE_DIR / "templates"
 ASSETS_DIR = BASE_DIR / "assets"
