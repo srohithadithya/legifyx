@@ -6,7 +6,7 @@ Initializes the environment and downloads required models
 import subprocess
 import sys
 import os
-from pathlib import Path
+from pathlib import Path as p
 
 
 def run_command(command, description):
