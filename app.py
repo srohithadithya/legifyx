@@ -1,4 +1,5 @@
 """
+"
 LEGIFYX - AI-Powered Legal Contract Analysis
 Streamlit-Ready Premium Version
 """
