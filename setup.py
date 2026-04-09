@@ -11,7 +11,7 @@ from pathlib import Path as p
 
 def run_command(command, description):
     """Run a command and print status"""
-    print(f"\n{'='*50}")
+    print(f"{'='*50}")
     print(f"🔧 {description}")
     print(f"{'='*50}")
     
